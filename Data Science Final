@@ -1,0 +1,31 @@
+---
+title: "Data Science Final"
+author: "Neel, Keven, Mario"
+date: "5/8/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r include=FALSE}
+library(dplyr)
+```
+
+
+```{r include=FALSE}
+
+mean_duration_unemployment <- read.csv("https://raw.githubusercontent.com/hernande7/Data-science-project/master/Average%20(Mean)%20Duration%20of%20Unemployment.csv", header = TRUE)
+energy_cpi <- read.csv("https://raw.githubusercontent.com/hernande7/Data-science-project/master/CPIAUCSL%20(1).csv", header = TRUE)
+labor_force_participation <- read.csv("https://raw.githubusercontent.com/hernande7/Data-science-project/master/Civilian%20Labor%20Force%20Participation%20Rate%20.csv", header = TRUE)
+cpi<- read.csv("https://raw.githubusercontent.com/hernande7/Data-science-project/master/Consumer%20Price%20Index%20for%20All%20Urban%20Consumers-%20All%20Items%20Less%20Food%20and%20Energy.csv",header= TRUE)
+output_per_hour <-read.csv("https://raw.githubusercontent.com/hernande7/Data-science-project/master/Nonfarm%20Business%20Sector-%20Real%20Output%20Per%20Hour%20of%20All%20Persons.csv", header = TRUE)
+real_gdp_per_capita <- read.csv("https://raw.githubusercontent.com/hernande7/Data-science-project/master/Real%20GDP%20Per%20capita.csv",header = TRUE)
+```
+
+```{r, include = FALSE}
+merged_list <- data.frame(mean_duration_unemployment,energy_cpi, labor_force_participation,cpi,output_per_hour)
+merged_list <- select(merged_list, DATE, UEMPMEAN,CPIAUCSL,CIVPART,CPILFESL_PCH,OPHNFB_PCH)
+```
