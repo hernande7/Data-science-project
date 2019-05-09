@@ -1,0 +1,31 @@
+library(rsconnect)
+library(shiny)
+library (ggplot2)
+library(shinydashboard)
+real_gdp_per_capita <- read.csv("https://raw.githubusercontent.com/hernande7/Data-science-project/master/Real%20GDP%20Per%20capita.csv", header = TRUE)
+
+#Consider switching to tabbed boxes
+#Need to change the size of the inputs
+#Remember to have a one GDP After combined with factors
+#Need to rename GDP
+
+ui <- dashboardPage(
+  dashboardHeader(title = "Economic Indicators and GDP Growth"),
+  dashboardSidebar( ),
+  dashboardBody(
+    fluidRow(
+      box(plotOutput("GDPGrowth")),
+      box(sliderInput("clfp", "Civilian Labor force Participation Rate",.5,.6,.63)),
+      box(sliderInput("mud", "Mean Unemployment Duration",0,1,.5)),
+      box(sliderInput("cpig", "Inflation",0,1,.5)),
+      box(sliderInput("cpie", "Change in Price of Energy",0,1,.5)),
+      box(sliderInput("unp", "Worker Productivity",0,1,.5)))))
+
+server <- function(input, output) {
+  output$"GDPGrowth" <- renderPlot
+  ({
+      ggplot(real_gdp_per_capita, aes(x=DATE, y=A939RX0Q048SBEA_PC1)) + geom_bar(stat = "identity", fill = "white")+ ggtitle("Economic Indicator changes in GDP Growth")+ xlab("GDP Growth") + ylab("Date")
+    })
+  }
+
+shinyApp(ui, server)
